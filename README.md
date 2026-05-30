@@ -101,7 +101,7 @@ i2s-protocol-verification/
 ├── results/
 │   ├── plot_data_v.txt                    <- Voltage data from Ngspice (print allv)
 │   ├── plot_data_i.txt                    <- Current data from Ngspice (print alli)
-│   └── waveforms/                         <- GTKWave screenshots from Ngspice simulation
+│   └── waveforms/                         <- eSim Python plots from Ngspice simulation
 │       ├── fig2_input_stimulus.png
 │       ├── fig3_full_frame.png
 │       ├── fig4_left_channel.png
