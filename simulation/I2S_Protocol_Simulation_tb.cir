@@ -1,0 +1,122 @@
+* ============================================================
+* I2S Protocol Simulation — Ngspice Testbench
+* Circuit-Level Modelling and Verification of I2S Protocol
+* with Gate-Level SIPO Receiver
+*
+* Author  : Juned Pinjari, GCOEN Nagpur
+* Tool    : eSim 2.5 / Ngspice (mixed-signal XSPICE)
+* FOSSEE  : https://esim.fossee.in/circuit-simulation-project/esim-circuit-simulation-run/766
+*
+* NOTE: This file is the complete runnable testbench.
+*       The .cir stub (eSim-generated) has empty source parameters.
+*       This file was manually authored to inject XSPICE instances
+*       and PWL/PULSE source parameters — required due to KiCad 8.0
+*       node-validation stripping XSPICE symbols on netlist export.
+*
+* Signals:
+*   SCK  : 1 MHz serial clock, 50% duty cycle
+*   WS   : 62.5 kHz word select (LR clock)
+*   SD   : PWL serial data — Left=10101010, Right=11001100
+*   OUT_0-OUT_7 : 8-bit SIPO parallel outputs (MSB=OUT_7)
+* ============================================================
+.title kicad schematic
+
+v1 ws 0 pulse(0 5 0 1n 1n 8u 16u)
+v2 sck 0 pulse(0 5 0 1n 1n 0.5u 1u)
+v3 sd 0 pwl(0 5 0.99u 5 1u 0 1.99u 0 2u 5 2.99u 5 3u 0 3.99u 0 4u 5 4.99u 5 5u 0 5.99u 0 6u 5 6.99u 5 7u 0 7.99u 0 8u 5 9.99u 5 10u 0 11.99u 0 12u 5 13.99u 5 14u 0 16u 0)
+r1 sck 0 1meg
+r2 ws 0 1meg
+r3 sd 0 1meg
+* u1 sck sck_dig adc_bridge_1
+* u2 ws ws_dig adc_bridge_1
+* u3 sd sd_dig adc_bridge_1
+* u4 sd_dig sck_dig null null out_0 null d_dff
+* u5 out_0 sck_dig null null out_1 null d_dff
+* u6 out_1 sck_dig null null out_2 null d_dff
+* u7 out_2 sck_dig null null out_3 null d_dff
+* u8 out_3 sck_dig null null out_4 null d_dff
+* u9 out_4 sck_dig null null out_5 null d_dff
+* u10 out_5 sck_dig null null out_6 null d_dff
+* u11 out_6 sck_dig null null out_7 null d_dff
+* u12 out_0 vout_0 dac_bridge_1
+* u13 out_1 vout_1 dac_bridge_1
+* u14 out_2 vout_2 dac_bridge_1
+* u15 out_3 vout_3 dac_bridge_1
+* u16 out_4 vout_4 dac_bridge_1
+* u17 out_5 vout_5 dac_bridge_1
+* u18 out_6 vout_6 dac_bridge_1
+* u19 out_7 vout_7 dac_bridge_1
+r4 vout_0 0 1meg
+r5 vout_1 0 1meg
+r6 vout_2 0 1meg
+r7 vout_3 0 1meg
+r8 vout_4 0 1meg
+r9 vout_5 0 1meg
+r10 vout_6 0 1meg
+r11 vout_7 0 1meg
+a1 [sck ] [sck_dig ] u1
+a2 [ws ] [ws_dig ] u2
+a3 [sd ] [sd_dig ] u3
+a4 sd_dig sck_dig null null out_0 null u4
+a5 out_0 sck_dig null null out_1 null u5
+a6 out_1 sck_dig null null out_2 null u6
+a7 out_2 sck_dig null null out_3 null u7
+a8 out_3 sck_dig null null out_4 null u8
+a9 out_4 sck_dig null null out_5 null u9
+a10 out_5 sck_dig null null out_6 null u10
+a11 out_6 sck_dig null null out_7 null u11
+a12 [out_0 ] [vout_0 ] u12
+a13 [out_1 ] [vout_1 ] u13
+a14 [out_2 ] [vout_2 ] u14
+a15 [out_3 ] [vout_3 ] u15
+a16 [out_4 ] [vout_4 ] u16
+a17 [out_5 ] [vout_5 ] u17
+a18 [out_6 ] [vout_6 ] u18
+a19 [out_7 ] [vout_7 ] u19
+* Schematic Name:                             adc_bridge_1, Ngspice Name: adc_bridge
+.model u1 adc_bridge(in_low=1.0 in_high=2.0 rise_delay=1.0e-9 fall_delay=1.0e-9 ) 
+* Schematic Name:                             adc_bridge_1, Ngspice Name: adc_bridge
+.model u2 adc_bridge(in_low=1.0 in_high=2.0 rise_delay=1.0e-9 fall_delay=1.0e-9 ) 
+* Schematic Name:                             adc_bridge_1, Ngspice Name: adc_bridge
+.model u3 adc_bridge(in_low=1.0 in_high=2.0 rise_delay=1.0e-9 fall_delay=1.0e-9 ) 
+* Schematic Name:                             d_dff, Ngspice Name: d_dff
+.model u4 d_dff(clk_delay=1.0e-9 set_delay=1.0e-9 reset_delay=1.0 ic=0 data_load=1.0e-12 clk_load=1.0e-12 set_load=1.0e-12 reset_load=1.0e-12 rise_delay=1.0e-9 fall_delay=1.0e-9 ) 
+* Schematic Name:                             d_dff, Ngspice Name: d_dff
+.model u5 d_dff(clk_delay=1.0e-9 set_delay=1.0e-9 reset_delay=1.0 ic=0 data_load=1.0e-12 clk_load=1.0e-12 set_load=1.0e-12 reset_load=1.0e-12 rise_delay=1.0e-9 fall_delay=1.0e-9 ) 
+* Schematic Name:                             d_dff, Ngspice Name: d_dff
+.model u6 d_dff(clk_delay=1.0e-9 set_delay=1.0e-9 reset_delay=1.0 ic=0 data_load=1.0e-12 clk_load=1.0e-12 set_load=1.0e-12 reset_load=1.0e-12 rise_delay=1.0e-9 fall_delay=1.0e-9 ) 
+* Schematic Name:                             d_dff, Ngspice Name: d_dff
+.model u7 d_dff(clk_delay=1.0e-9 set_delay=1.0e-9 reset_delay=1.0 ic=0 data_load=1.0e-12 clk_load=1.0e-12 set_load=1.0e-12 reset_load=1.0e-12 rise_delay=1.0e-9 fall_delay=1.0e-9 ) 
+* Schematic Name:                             d_dff, Ngspice Name: d_dff
+.model u8 d_dff(clk_delay=1.0e-9 set_delay=1.0e-9 reset_delay=1.0 ic=0 data_load=1.0e-12 clk_load=1.0e-12 set_load=1.0e-12 reset_load=1.0e-12 rise_delay=1.0e-9 fall_delay=1.0e-9 ) 
+* Schematic Name:                             d_dff, Ngspice Name: d_dff
+.model u9 d_dff(clk_delay=1.0e-9 set_delay=1.0e-9 reset_delay=1.0 ic=0 data_load=1.0e-12 clk_load=1.0e-12 set_load=1.0e-12 reset_load=1.0e-12 rise_delay=1.0e-9 fall_delay=1.0e-9 ) 
+* Schematic Name:                             d_dff, Ngspice Name: d_dff
+.model u10 d_dff(clk_delay=1.0e-9 set_delay=1.0e-9 reset_delay=1.0 ic=0 data_load=1.0e-12 clk_load=1.0e-12 set_load=1.0e-12 reset_load=1.0e-12 rise_delay=1.0e-9 fall_delay=1.0e-9 ) 
+* Schematic Name:                             d_dff, Ngspice Name: d_dff
+.model u11 d_dff(clk_delay=1.0e-9 set_delay=1.0e-9 reset_delay=1.0 ic=0 data_load=1.0e-12 clk_load=1.0e-12 set_load=1.0e-12 reset_load=1.0e-12 rise_delay=1.0e-9 fall_delay=1.0e-9 ) 
+* Schematic Name:                             dac_bridge_1, Ngspice Name: dac_bridge
+.model u12 dac_bridge(out_low=0.0 out_high=5.0 out_undef=0.5 input_load=1.0e-12 t_rise=1.0e-9 t_fall=1.0e-9 ) 
+* Schematic Name:                             dac_bridge_1, Ngspice Name: dac_bridge
+.model u13 dac_bridge(out_low=0.0 out_high=5.0 out_undef=0.5 input_load=1.0e-12 t_rise=1.0e-9 t_fall=1.0e-9 ) 
+* Schematic Name:                             dac_bridge_1, Ngspice Name: dac_bridge
+.model u14 dac_bridge(out_low=0.0 out_high=5.0 out_undef=0.5 input_load=1.0e-12 t_rise=1.0e-9 t_fall=1.0e-9 ) 
+* Schematic Name:                             dac_bridge_1, Ngspice Name: dac_bridge
+.model u15 dac_bridge(out_low=0.0 out_high=5.0 out_undef=0.5 input_load=1.0e-12 t_rise=1.0e-9 t_fall=1.0e-9 ) 
+* Schematic Name:                             dac_bridge_1, Ngspice Name: dac_bridge
+.model u16 dac_bridge(out_low=0.0 out_high=5.0 out_undef=0.5 input_load=1.0e-12 t_rise=1.0e-9 t_fall=1.0e-9 ) 
+* Schematic Name:                             dac_bridge_1, Ngspice Name: dac_bridge
+.model u17 dac_bridge(out_low=0.0 out_high=5.0 out_undef=0.5 input_load=1.0e-12 t_rise=1.0e-9 t_fall=1.0e-9 ) 
+* Schematic Name:                             dac_bridge_1, Ngspice Name: dac_bridge
+.model u18 dac_bridge(out_low=0.0 out_high=5.0 out_undef=0.5 input_load=1.0e-12 t_rise=1.0e-9 t_fall=1.0e-9 ) 
+* Schematic Name:                             dac_bridge_1, Ngspice Name: dac_bridge
+.model u19 dac_bridge(out_low=0.0 out_high=5.0 out_undef=0.5 input_load=1.0e-12 t_rise=1.0e-9 t_fall=1.0e-9 ) 
+.tran 0.01e-06 20e-06 0e-00
+
+* Control Statements 
+.control
+run
+print allv > plot_data_v.txt
+print alli > plot_data_i.txt
+.endc
+.end

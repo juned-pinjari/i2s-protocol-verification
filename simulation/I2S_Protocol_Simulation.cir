@@ -1,0 +1,35 @@
+.title KiCad schematic
+v1 WS 0 pulse
+v2 SCK 0 pulse
+v3 SD 0 pwl
+R1 SCK 0 1Meg
+R2 WS 0 1Meg
+R3 SD 0 1Meg
+U1 SCK SCK_DIG adc_bridge_1
+U2 WS WS_DIG adc_bridge_1
+U3 SD SD_DIG adc_bridge_1
+U4 SD_DIG SCK_DIG NULL NULL OUT_0 NULL d_dff
+U5 OUT_0 SCK_DIG NULL NULL OUT_1 NULL d_dff
+U6 OUT_1 SCK_DIG NULL NULL OUT_2 NULL d_dff
+U7 OUT_2 SCK_DIG NULL NULL OUT_3 NULL d_dff
+U8 OUT_3 SCK_DIG NULL NULL OUT_4 NULL d_dff
+U9 OUT_4 SCK_DIG NULL NULL OUT_5 NULL d_dff
+U10 OUT_5 SCK_DIG NULL NULL OUT_6 NULL d_dff
+U11 OUT_6 SCK_DIG NULL NULL OUT_7 NULL d_dff
+U12 OUT_0 VOUT_0 dac_bridge_1
+U13 OUT_1 VOUT_1 dac_bridge_1
+U14 OUT_2 VOUT_2 dac_bridge_1
+U15 OUT_3 VOUT_3 dac_bridge_1
+U16 OUT_4 VOUT_4 dac_bridge_1
+U17 OUT_5 VOUT_5 dac_bridge_1
+U18 OUT_6 VOUT_6 dac_bridge_1
+U19 OUT_7 VOUT_7 dac_bridge_1
+R4 VOUT_0 0 1Meg
+R5 VOUT_1 0 1Meg
+R6 VOUT_2 0 1Meg
+R7 VOUT_3 0 1Meg
+R8 VOUT_4 0 1Meg
+R9 VOUT_5 0 1Meg
+R10 VOUT_6 0 1Meg
+R11 VOUT_7 0 1Meg
+.end

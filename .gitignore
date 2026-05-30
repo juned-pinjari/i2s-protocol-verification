@@ -1,0 +1,10 @@
+# eSim internal files
+*_Previous_Values.xml
+analysis
+
+# Ngspice binary output
+*.raw
+
+# OS artifacts
+.DS_Store
+Thumbs.db
